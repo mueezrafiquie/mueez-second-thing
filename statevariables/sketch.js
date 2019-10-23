@@ -654,7 +654,7 @@ function createNewAliens() {
 function moveAliens() {
   for (let i = 0; i < aliens.length; i++) {
     aliens[i].moveIndividualAliens();
-    if (aliens[i].y > height) {
+    if (aliens[i].y - 25 > height) {
       aliens.shift();
       gameMode = "game over";
       resetArrays();
