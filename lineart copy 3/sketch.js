@@ -1,6 +1,6 @@
 let grid = [];
-let rows = 30;
-let cols = 30;
+let rows = 300;
+let cols = 300;
 let autoPlay = false;
 
 
@@ -17,7 +17,7 @@ function draw() {
   background(220);
   showGrid(grid, rows, cols);
   if (autoPlay) {
-    if (frameCount % 5 === 0) {
+    if (frameCount % 0.5 === 0) {
     update();
     }
   }
@@ -40,6 +40,7 @@ function showGrid(grid, rows, cols) {
       } else {
         fill(0);
       }
+      noStroke()
       rect(x * cellSize, y * cellSize, cellSize, cellSize);
     }
   }
