@@ -39,19 +39,29 @@ function windowResized() {
 function keyPressed() {
   if (key === "w") {
     movingUp = true;
+    movingDown = false;
+    movingLeft = false;
+    movingRight = false;
   }
   if (key === "s") {
     movingDown = true;
+    movingUp = false;
+    movingLeft = false;
+    movingRight = false;
   }
   if (key === "a") {
     movingLeft = true;
+    movingUp = false;
+    movingDown = false;
+    movingRight = false;
   }
   if (key === "d") {
     movingRight = true;
+    movingUp = false;
+    movingDown = false;
+    movingLeft = false;
   }
 }
-
-
 
 function moveSnake() {
   grid[playerY][playerX] = 0;
@@ -73,23 +83,6 @@ function moveSnake() {
   // put player back into grid
   grid[playerY][playerX] = 1;
 }
-
-
-// function keyReleased() {
-//   if (key === "w") {
-//     movingUp = false;
-//   }
-//   if (key === "s") {
-//     movingDown = false;
-//   }
-//   if (key === "a") {
-//     movingLeft = false;
-//   }
-//   if (key === "d") {
-//     movingRight = false;
-//   }
-// }
-
 
 function createEmptyGrid() {
   let emptyGrid = [];
