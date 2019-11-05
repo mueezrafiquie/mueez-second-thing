@@ -3,13 +3,40 @@
 let grid;
 let rows = 30;
 let cols = 30;
+
 let playerX = 10;
 let playerY = 15;
+let playerPosition;
 let speed = 1;
+
 let movingLeft = false;
 let movingRight = false;
 let movingUp = false;
 let movingDown = false;
+
+let food;
+let foodX;
+let foodY;
+
+let array = [
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  15,
+  16,
+  17,
+  18,
+  19,
+  20,
+  21,
+  22,
+  23,
+  24,
+  25
+];
 
 function setup() {
   if (windowWidth > windowHeight) {
@@ -18,14 +45,19 @@ function setup() {
     createCanvas(windowWidth, windowWidth);
   }
   grid = createEmptyGrid(cols, rows);
-  grid[15][15] = 1;
+
+
   grid[playerY][playerX] = 1;
+  playerPosition = playerY, playerX;
+  foodX = random(array);
+  foodY = random(array);
 }
 
 function draw() {
   background(220);
   displayGrid(grid, rows, cols);
   moveSnake();
+  displayFood();
 }
 
 function windowResized() {
@@ -43,16 +75,16 @@ function keyPressed() {
     movingLeft = false;
     movingRight = false;
   }
-  if (key === "s") {
-    movingDown = true;
-    movingUp = false;
-    movingLeft = false;
-    movingRight = false;
-  }
   if (key === "a") {
     movingLeft = true;
     movingUp = false;
     movingDown = false;
+    movingRight = false;
+  }
+  if (key === "s") {
+    movingDown = true;
+    movingUp = false;
+    movingLeft = false;
     movingRight = false;
   }
   if (key === "d") {
@@ -106,5 +138,19 @@ function displayGrid(grid, rows, cols) {
       }
       rect(x * cellSize, y * cellSize, cellSize, cellSize);
     }
+  }
+}
+
+
+function displayFood() {
+  grid[foodY][foodX] = 1;
+
+  food = foodY, foodX;
+  
+  if (food === playerPosition) {
+    console.log("yup")
+  }
+  else {
+
   }
 }

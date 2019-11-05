@@ -1,6 +1,6 @@
 let grid = [];
-let rows = 300;
-let cols = 300;
+let rows = 150;
+let cols = 150;
 let autoPlay = false;
 
 
