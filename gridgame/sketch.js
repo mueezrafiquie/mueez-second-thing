@@ -67,7 +67,7 @@ function displayGrid(grid, rows, cols) {
       if (grid[y][x] === 0) {
         fill(255);
       } else {
-        fill(0);
+        fill(180);
       }
       rect(x * cellSize, y * cellSize, cellSize, cellSize);
     }
@@ -118,19 +118,24 @@ function keyPressed() {
 
 function moveSnake() {
   // move the player
+  
+
   if (frameCount % 5 === 0) {
-    grid[playerY][playerX] = 0;
 
     if (movingUp && playerY > 1) {
+      grid[playerY][playerX] = 0;
       playerY -= 1;
     }
     if (movingDown && playerY < rows - 2) {
+      grid[playerY][playerX] = 0;
       playerY += 1;
     }
     if (movingRight && playerX < cols - 2) {
+      grid[playerY][playerX] = 0;
       playerX += 1;
     }
     if (movingLeft && playerX > 1) {
+      grid[playerY][playerX] = 0;
       playerX -= 1;
     }
     // put player back into grid
@@ -147,6 +152,7 @@ function displayFood() {
     foodX = random(array);
     foodY = random(array);
     grid[foodY][foodX] = 1;
+    grid[playerY - 1][playerX] = 1;
   } else {
   }
 }
