@@ -1,5 +1,3 @@
-// WASD in Grid Demo
-
 let grid;
 let rows = 30;
 let cols = 30;
@@ -118,9 +116,8 @@ function keyPressed() {
 
 function moveSnake() {
   // move the player
-  if (frameCount % 5 === 0) {
+  if (frameCount % 1 === 0) {
     grid[playerY][playerX] = 0;
-
     if (movingUp && playerY > 1) {
       playerY -= 1;
     }
@@ -134,8 +131,8 @@ function moveSnake() {
       playerX -= 1;
     }
     // put player back into grid
-    grid[playerY][playerX] = 1;
   }
+  grid[playerY][playerX] = 1;
 }
 
 function displayFood() {
