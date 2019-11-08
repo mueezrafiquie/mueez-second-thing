@@ -4,8 +4,12 @@ let grid;
 let rows = 30;
 let cols = 30;
 
-let playerX = 10;
-let playerY = 15;
+let snakeBlock = {
+  x: 10,
+  y: 10
+};
+
+let snake = [snakeBlock];
 
 let speed = 1;
 
@@ -29,7 +33,7 @@ function setup() {
 
   createBorder();
 
-  grid[playerY][playerX] = 1;
+  grid[(snake[0].x, snake[0].y)] = 1;
   foodX = random(array);
   foodY = random(array);
 }
@@ -78,14 +82,14 @@ function createBorder() {
   for (let i = 0; i < rows; i++) {
     grid[0][i] = 1;
   }
-  for (let j = 0; j < cols; j++) {
-    grid[j][0] = 1;
+  for (let i = 0; i < cols; i++) {
+    grid[i][0] = 1;
   }
-  for (let j = cols - 1; j >= 0; j--) {
-    grid[rows - 1][j] = 1;
+  for (let i = cols - 1; i >= 0; i--) {
+    grid[rows - 1][i] = 1;
   }
-  for (let j = cols - 1; j >= 0; j--) {
-    grid[j][rows - 1] = 1;
+  for (let i = cols - 1; i >= 0; i--) {
+    grid[i][rows - 1] = 1;
   }
 }
 
@@ -116,43 +120,63 @@ function keyPressed() {
   }
 }
 
-function moveSnake() {
-  // move the player
+// function moveSnake() {
+//   // move the player
+
+//   if (frameCount % 5 === 0) {
+//     if (movingUp && snake[0].y > 1) {
+//       grid[(snake[0].x, snake[0].y)] = 0;
+//       snake[0].y -= 1;
+//     }
+//     if (movingDown && snake[0].y < rows - 2) {
+//       grid[(snake[0].x, snake[0].y)] = 0;
+//       snake[0].y += 1;
+//     }
+//     if (movingRight && snake[0].x < cols - 2) {
+//       grid[(snake[0].x, snake[0].y)] = 0;
+//       snake[0].x += 1;
+//     }
+//     if (movingLeft && snake[0].x > 1) {
+//       grid[(snake[0].x, snake[0].y)] = 0;
+//       snake[0].x -= 1;
+//     }
+//     // put player back into grid
+//     grid[(snake[0].x, snake[0].y)] = 1;
+//   }
+// }
+
+// function moveSnake() {
+  //   // move the player
   
-
-  if (frameCount % 5 === 0) {
-
-    if (movingUp && playerY > 1) {
-      grid[playerY][playerX] = 0;
-      playerY -= 1;
-    }
-    if (movingDown && playerY < rows - 2) {
-      grid[playerY][playerX] = 0;
-      playerY += 1;
-    }
-    if (movingRight && playerX < cols - 2) {
-      grid[playerY][playerX] = 0;
-      playerX += 1;
-    }
-    if (movingLeft && playerX > 1) {
-      grid[playerY][playerX] = 0;
-      playerX -= 1;
-    }
-    // put player back into grid
-    grid[playerY][playerX] = 1;
-  }
-}
+  //   if (frameCount % 5 === 0) {
+  //     if (movingUp && snake[0].y > 1) {
+  //       grid[(snake[0].x, snake[0].y)] = 0;
+  //       snake[0].y -= 1;
+  //     }
+  //     if (movingDown && snake[0].y < rows - 2) {
+  //       grid[(snake[0].x, snake[0].y)] = 0;
+  //       snake[0].y += 1;
+  //     }
+  //     if (movingRight && snake[0].x < cols - 2) {
+  //       grid[(snake[0].x, snake[0].y)] = 0;
+  //       snake[0].x += 1;
+  //     }
+  //     if (movingLeft && snake[0].x > 1) {
+  //       grid[(snake[0].x, snake[0].y)] = 0;
+  //       snake[0].x -= 1;
+  //     }
+  //     // put player back into grid
+  //     grid[(snake[0].x, snake[0].y)] = 1;
+  //   }
+  // }
 
 function displayFood() {
   grid[foodY][foodX] = 1;
 
-  if (foodY === playerY && foodX === playerX) {
-    console.log("yup");
+  if (foodY === snake[0].y && foodX === snake[0].x) {
     grid[foodY][foodX] = 0;
     foodX = random(array);
     foodY = random(array);
     grid[foodY][foodX] = 1;
-    grid[playerY - 1][playerX] = 1;
-  } else {
   }
 }
