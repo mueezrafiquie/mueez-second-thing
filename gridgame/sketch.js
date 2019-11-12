@@ -31,7 +31,6 @@ function setup() {
 
   createBorder();
 
-  grid[(snake[0].x, snake[0].y)] = 1;
   foodX = random(array);
   foodY = random(array);
 }
@@ -39,6 +38,7 @@ function setup() {
 function draw() {
   background(220);
   displayGrid(grid, rows, cols);
+  displaySnake();
   moveSnake();
   displayFood();
 }
@@ -118,6 +118,64 @@ function keyPressed() {
   }
 }
 
+function displaySnake() {
+  for (let i = 0; i < snake.length; i++) {
+    grid[snake[i].y][snake[i].x] = 1;
+  }
+}
+
+function moveSnake() {
+  // if (snake.length === 1) {
+  if (frameCount % 2 === 0) {
+    for (let i = 0; i < snake.length; i++) {
+      if (movingUp && snake[i].y > 1) {
+        previousLocation = snake.pop();
+        grid[previousLocation.y][previousLocation.x] = 0;
+        previousLocation.y -= 1;
+        snake.push(snakeBlock);
+      }
+      if (movingDown && snake[i].y < rows - 2) {
+        previousLocation = snake.pop();
+        grid[previousLocation.y][previousLocation.x] = 0;
+        previousLocation.y += 1;
+        snake.push(snakeBlock);
+      }
+      if (movingRight && snake[i].x < cols - 2) {
+        previousLocation = snake.pop();
+        grid[previousLocation.y][previousLocation.x] = 0;
+        previousLocation.x += 1;
+        snake.push(snakeBlock);
+      }
+      if (movingLeft && snake[i].x > 1) {
+        previousLocation = snake.pop();
+        grid[previousLocation.y][previousLocation.x] = 0;
+        previousLocation.x -= 1;
+        snake.push(snakeBlock);
+      }
+    }
+  }
+  // }
+}
+
+function displayFood() {
+  grid[foodY][foodX] = 1;
+  for (let i = 0; i < snake.length; i++) {
+    if (foodY === snake[i].y && foodX === snake[i].x) {
+      grid[foodY][foodX] = 0;
+      foodX = random(array);
+      foodY = random(array);
+      grid[foodY][foodX] = 1;
+      // if (movingUp) {
+      //   newSnakeBlock = {
+      //     x: snake[i].x,
+      //     y: snake[i].y -= 1
+      //   }
+      //   snake.push(newSnakeBlock);
+      // }
+    }
+  }
+}
+
 // function moveSnake() {
 //   // move the player
 
@@ -144,37 +202,26 @@ function keyPressed() {
 // }
 
 // function moveSnake() {
-  //   // move the player
-  
-  //   if (frameCount % 5 === 0) {
-  //     if (movingUp && snake[0].y > 1) {
-  //       grid[(snake[0].x, snake[0].y)] = 0;
-  //       snake[0].y -= 1;
-  //     }
-  //     if (movingDown && snake[0].y < rows - 2) {
-  //       grid[(snake[0].x, snake[0].y)] = 0;
-  //       snake[0].y += 1;
-  //     }
-  //     if (movingRight && snake[0].x < cols - 2) {
-  //       grid[(snake[0].x, snake[0].y)] = 0;
-  //       snake[0].x += 1;
-  //     }
-  //     if (movingLeft && snake[0].x > 1) {
-  //       grid[(snake[0].x, snake[0].y)] = 0;
-  //       snake[0].x -= 1;
-  //     }
-  //     // put player back into grid
-  //     grid[(snake[0].x, snake[0].y)] = 1;
-  //   }
-  // }
+//   // move the player
 
-function displayFood() {
-  grid[foodY][foodX] = 1;
-
-  if (foodY === snake[0].y && foodX === snake[0].x) {
-    grid[foodY][foodX] = 0;
-    foodX = random(array);
-    foodY = random(array);
-    grid[foodY][foodX] = 1;
-  }
-}
+//   if (frameCount % 5 === 0) {
+//     if (movingUp && snake[0].y > 1) {
+//       grid[(snake[0].x, snake[0].y)] = 0;
+//       snake[0].y -= 1;
+//     }
+//     if (movingDown && snake[0].y < rows - 2) {
+//       grid[(snake[0].x, snake[0].y)] = 0;
+//       snake[0].y += 1;
+//     }
+//     if (movingRight && snake[0].x < cols - 2) {
+//       grid[(snake[0].x, snake[0].y)] = 0;
+//       snake[0].x += 1;
+//     }
+//     if (movingLeft && snake[0].x > 1) {
+//       grid[(snake[0].x, snake[0].y)] = 0;
+//       snake[0].x -= 1;
+//     }
+//     // put player back into grid
+//     grid[(snake[0].x, snake[0].y)] = 1;
+//   }
+// }
