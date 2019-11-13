@@ -120,7 +120,7 @@ function keyPressed() {
 }
 
 function displaySnake() {
-  for (let i = 0; i < snake.length; i++) {
+  for (let i = snake.length - 1; i >= 0; i--) {
     grid[snake[i].y][snake[i].x] = 1;
   }
 }
@@ -128,20 +128,24 @@ function displaySnake() {
 function moveSnake() {
   // if (snake.length === 1) {
   if (frameCount % 2 === 0) {
-    for (let i = 0; i < snake.length; i++) {
+    for (let i = snake.length - 1; i >= 0; i--) {
       if (movingUp && snake[i].y > 1) {
-       if (isEating = false) {
+        if ((isEating === false)) {
           previousLocation = snake.pop();
           grid[previousLocation.y][previousLocation.x] = 0;
           previousLocation.y -= 1;
           snake.push(snakeBlock);
-       }
-        else {
-          snakeBlock.y -= 1
-          // snake.push(snakeBlock);
-        }
-       }
+        } 
+        // else {
+        //   snakeBlock.y -= 1;
+        //   previousLocation = snake.pop();
+        //   grid[previousLocation.y][previousLocation.x] = 0;
+        //   previousLocation.y -= 1;
+        //   snake.push(snakeBlock);
+        //   snake.push(snakeBlock);
+        // }
       }
+
       if (movingDown && snake[i].y < rows - 2) {
         previousLocation = snake.pop();
         grid[previousLocation.y][previousLocation.x] = 0;
@@ -162,20 +166,19 @@ function moveSnake() {
       }
     }
   }
-  // }
-
+}
+// }
 
 function displayFood() {
   grid[foodY][foodX] = 1;
-  for (let i = 0; i < snake.length; i++) {
+  for (let i = snake.length - 1; i >= 0; i--) {
     if (foodY === snake[i].y && foodX === snake[i].x) {
       isEating = true;
       grid[foodY][foodX] = 0;
       foodX = random(array);
       foodY = random(array);
       grid[foodY][foodX] = 1;
-    }
-    else {
+    } else {
       isEating = false;
     }
   }
