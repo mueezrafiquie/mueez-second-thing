@@ -1,27 +1,39 @@
+// Grid Based Game Assignment
+// Mueez Rafiquie
+// November 13, 2019
+//
+//This is a simple snake game but the adding length property hasn't been successfully implemented
+//
+
+
+//Global Variables
+
+//grid variables
 let grid;
 let rows = 30;
 let cols = 30;
 
+//snake variables 
 let snakeBlock = {
   x: 10,
   y: 10
 };
-
 let snake = [snakeBlock];
 
-let speed = 1;
-
+//movement variables
 let movingLeft = false;
 let movingRight = false;
 let movingUp = false;
 let movingDown = false;
 
+//food variables
 let foodX;
 let foodY;
 let isEating = false;
-
 let array = [5, 6, 7, 8, 9, 10, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
 
+
+//setting up canvas and defining any variables that contain p5js elements 
 function setup() {
   if (windowWidth > windowHeight) {
     createCanvas(windowHeight * 0.9, windowHeight * 0.9);
@@ -36,6 +48,7 @@ function setup() {
   foodY = random(array);
 }
 
+//put function in draw loop so that they are repeatedly called
 function draw() {
   background(220);
   displayGrid(grid, rows, cols);
@@ -44,6 +57,7 @@ function draw() {
   displayFood();
 }
 
+//allowing the window to be resized while keeping the game playable
 function windowResized() {
   if (windowWidth > windowHeight) {
     createCanvas(windowHeight * 0.9, windowHeight * 0.9);
@@ -52,6 +66,7 @@ function windowResized() {
   }
 }
 
+//creates an empty grid based on the number of rows and coloumns 
 function createEmptyGrid() {
   let emptyGrid = [];
   for (let x = 0; x < cols; x++) {
@@ -63,6 +78,7 @@ function createEmptyGrid() {
   return emptyGrid;
 }
 
+//displays rest of grid
 function displayGrid(grid, rows, cols) {
   let cellSize = width / cols;
   for (let y = 0; y < rows; y++) {
@@ -77,6 +93,7 @@ function displayGrid(grid, rows, cols) {
   }
 }
 
+//creates a border along the outside of the grid
 function createBorder() {
   for (let i = 0; i < rows; i++) {
     grid[0][i] = 1;
@@ -92,6 +109,7 @@ function createBorder() {
   }
 }
 
+//changes booleans for direction based on what key is pressed
 function keyPressed() {
   if (key === "w") {
     movingUp = true;
@@ -119,12 +137,14 @@ function keyPressed() {
   }
 }
 
+//displays generated snake
 function displaySnake() {
   for (let i = snake.length - 1; i >= 0; i--) {
     grid[snake[i].y][snake[i].x] = 1;
   }
 }
 
+//moves snake based on the boolean which is true which depends on the key presssed
 function moveSnake() {
   // if (snake.length === 1) {
   if (frameCount % 2 === 0) {
@@ -144,6 +164,9 @@ function moveSnake() {
         //   snake.push(snakeBlock);
         //   snake.push(snakeBlock);
         // }
+
+
+        //attempt at adding snake length
       }
 
       if (movingDown && snake[i].y < rows - 2) {
@@ -169,6 +192,8 @@ function moveSnake() {
 }
 // }
 
+
+//displays and resets the "food" whenever the snake eats it 
 function displayFood() {
   grid[foodY][foodX] = 1;
   for (let i = snake.length - 1; i >= 0; i--) {
@@ -183,53 +208,3 @@ function displayFood() {
     }
   }
 }
-
-// function moveSnake() {
-//   // move the player
-
-//   if (frameCount % 5 === 0) {
-//     if (movingUp && snake[0].y > 1) {
-//       grid[(snake[0].x, snake[0].y)] = 0;
-//       snake[0].y -= 1;
-//     }
-//     if (movingDown && snake[0].y < rows - 2) {
-//       grid[(snake[0].x, snake[0].y)] = 0;
-//       snake[0].y += 1;
-//     }
-//     if (movingRight && snake[0].x < cols - 2) {
-//       grid[(snake[0].x, snake[0].y)] = 0;
-//       snake[0].x += 1;
-//     }
-//     if (movingLeft && snake[0].x > 1) {
-//       grid[(snake[0].x, snake[0].y)] = 0;
-//       snake[0].x -= 1;
-//     }
-//     // put player back into grid
-//     grid[(snake[0].x, snake[0].y)] = 1;
-//   }
-// }
-
-// function moveSnake() {
-//   // move the player
-
-//   if (frameCount % 5 === 0) {
-//     if (movingUp && snake[0].y > 1) {
-//       grid[(snake[0].x, snake[0].y)] = 0;
-//       snake[0].y -= 1;
-//     }
-//     if (movingDown && snake[0].y < rows - 2) {
-//       grid[(snake[0].x, snake[0].y)] = 0;
-//       snake[0].y += 1;
-//     }
-//     if (movingRight && snake[0].x < cols - 2) {
-//       grid[(snake[0].x, snake[0].y)] = 0;
-//       snake[0].x += 1;
-//     }
-//     if (movingLeft && snake[0].x > 1) {
-//       grid[(snake[0].x, snake[0].y)] = 0;
-//       snake[0].x -= 1;
-//     }
-//     // put player back into grid
-//     grid[(snake[0].x, snake[0].y)] = 1;
-//   }
-// }
