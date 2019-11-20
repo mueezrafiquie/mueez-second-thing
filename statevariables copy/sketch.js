@@ -671,6 +671,18 @@ class Alien {
 //pushing alien values into the aliens array to be created
 function createNewAliens() {
   aliens.push(new Alien(width * 0.5, 50, "zigzag"));
+  aliens.push(new Alien(width * 0.5, 50, "zigzag"));
+  aliens.push(new Alien(width * 0.5, 50, "zigzag"));
+  aliens.push(new Alien(width * 0.5, 50, "zigzag"));
+  aliens.push(new Alien(width * 0.5, 50, "zigzag"));
+}
+
+function sendAlienWaves() {
+  if (millis() >= lastTimeWaveWasSent + timeBetweenWaves) {
+    createNewAliens();
+    moveAliens();
+    lastTimeWaveWasSent = millis();
+  }
 }
 
 //looping through all the aliens created to apply the movement function to each of them
@@ -686,13 +698,6 @@ function moveAliens() {
 }
 
 //using millis to continously send waves of aliens over time
-function sendAlienWaves() {
-  if (millis() >= lastTimeWaveWasSent + timeBetweenWaves) {
-    createNewAliens();
-    moveAliens();
-    lastTimeWaveWasSent = millis();
-  }
-}
 
 //looping through all aliens to draw a hitbox
 function drawHitBox() {
